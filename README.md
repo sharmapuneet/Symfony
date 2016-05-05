@@ -157,7 +157,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class TwitterController extends Controller
 {
     /**
-     * @Route("/lucky/number")
+     * @Route("/tweety")
      */
     public function tweetAction()
     {
