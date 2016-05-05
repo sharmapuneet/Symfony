@@ -1,0 +1,11 @@
+<section class="knp_last_tweets">
+    {% if tweets %}
+        <ul>
+        {% for tweet in tweets %}
+            <li>{{ tweet.text|knp_tweet_urlize }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        No tweets
+    {% endif %}
+</section>
