@@ -129,13 +129,11 @@ endroid_twitter:
 
 ## Routing
 
-If you don't want to expose the Twitter API via your application, you can skip this section.
-
 ``` yml
-EndroidTwitterBundle:
-    resource:	"@EndroidTwitterBundle/Controller/"
-    type:		annotation
-    prefix:		/twitterapi
+twitter:
+    path: /tweety
+    defaults: 
+        _controller: AppBundle:Twitter:tweet  
 ```
 
 This exposes the Twitter API via <yourdomain>/twitterapi. This means that instead of sending a signed request to
@@ -149,16 +147,33 @@ After installation and configuration, the service can be directly referenced fro
 ```php
 <?php
 
-$twitter = $this->get('endroid.twitter');
+namespace AppBundle\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class TwitterController extends Controller
+{
+    /**
+     * @Route("/lucky/number")
+     */
+    public function tweetAction()
+    {
+        $twitter = $this->get('endroid.twitter');
 
 // Retrieve the user's timeline
-$tweets = $twitter->getTimeline(array(
-    'count' => 5
-));
-
-// Or retrieve the timeline using the generic query method
 $response = $twitter->query('statuses/user_timeline', 'GET', 'json');
-$tweets = json_decode($response->getContent());
+$tweets = $response->getContent();
+     
+
+     return new response($tweets);
+```
+
+```
+url - http://localhost:8000/tweety
+It will produce Json content for the latest tweets.
 ```
 
 ## Versioning
