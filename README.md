@@ -171,10 +171,8 @@ $tweets = $response->getContent();
      return new response($tweets);
 ```
 
-```
-url - [http://localhost:8000/tweety](http://localhost:8000/tweety)
+url - http://localhost:8000/tweety
 It will produce Json content for the latest tweets.
-```
 
 ## Versioning
 
