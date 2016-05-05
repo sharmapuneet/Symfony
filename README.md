@@ -1,10 +1,8 @@
-Symfony Demo Application
+Symfony Twitter Demo Application
 ========================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop Symfony applications following the recommended best practices.
-
-[![Build Status](https://travis-ci.org/symfony/symfony-demo.svg?branch=master)](https://travis-ci.org/symfony/symfony-demo)
+The "Symfony Twitter Demo Application" is a reference application created to show how
+to develop Symfony applications with twitter timeline following the recommended best practices.
 
 Requirements
 ------------
@@ -19,8 +17,6 @@ information.
 
 Installation
 ------------
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 First, install the [Symfony Installer](https://github.com/symfony/symfony-installer)
 if you haven't already. Then, install the Symfony Demo Application executing
