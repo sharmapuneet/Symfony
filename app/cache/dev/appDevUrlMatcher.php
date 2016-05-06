@@ -27,6 +27,56 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $context = $this->context;
         $request = $this->request;
 
+        if (0 === strpos($pathinfo, '/js')) {
+            if (0 === strpos($pathinfo, '/js/d58d21e')) {
+                // _assetic_d58d21e
+                if ($pathinfo === '/js/d58d21e.js') {
+                    return array (  '_controller' => 'assetic.controller:render',  'name' => 'd58d21e',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_d58d21e',);
+                }
+
+                if (0 === strpos($pathinfo, '/js/d58d21e_')) {
+                    // _assetic_d58d21e_0
+                    if ($pathinfo === '/js/d58d21e_jquery_1.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'd58d21e',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_d58d21e_0',);
+                    }
+
+                    // _assetic_d58d21e_1
+                    if ($pathinfo === '/js/d58d21e_bootstrap.min_2.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'd58d21e',  'pos' => 1,  '_format' => 'js',  '_route' => '_assetic_d58d21e_1',);
+                    }
+
+                    // _assetic_d58d21e_2
+                    if ($pathinfo === '/js/d58d21e_carousel_3.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'd58d21e',  'pos' => 2,  '_format' => 'js',  '_route' => '_assetic_d58d21e_2',);
+                    }
+
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/js/c67cb4a')) {
+                // _assetic_c67cb4a
+                if ($pathinfo === '/js/c67cb4a.js') {
+                    return array (  '_controller' => 'assetic.controller:render',  'name' => 'c67cb4a',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_c67cb4a',);
+                }
+
+                if (0 === strpos($pathinfo, '/js/c67cb4a_')) {
+                    // _assetic_c67cb4a_0
+                    if ($pathinfo === '/js/c67cb4a_carousel_1.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'c67cb4a',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_c67cb4a_0',);
+                    }
+
+                    // _assetic_c67cb4a_1
+                    if ($pathinfo === '/js/c67cb4a_bootstrap.min_2.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'c67cb4a',  'pos' => 1,  '_format' => 'js',  '_route' => '_assetic_c67cb4a_1',);
+                    }
+
+                }
+
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {

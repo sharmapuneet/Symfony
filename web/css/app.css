@@ -14,3 +14,264 @@
  *  Symfony Demo Application by @symfony
  *  License: MIT License
  */p,ul,ol{font-size:19px;margin-bottom:1.5em}li{margin-bottom:0.5em}code{background:#ecf0f1;color:#2c3e50}.text-danger,.text-danger:hover{color:#e74c3c}i{margin-right:0.25em}body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;min-height:100vh}header{margin-bottom:2em}header ul.nav li{margin-bottom:0}header .locales a{padding-right:10px}.body-container{-webkit-flex:1;flex:1;min-height:600px}.body-container #main h1,.body-container #main h2{margin-top:0}#sidebar .section{margin-bottom:2em}#sidebar p{font-size:15px}#sidebar p + p{margin:1.5em 0 0}footer{background:#ecf0f1;margin-top:2em;padding-top:2em;padding-bottom:2em}footer p{color:#7b8a8b;font-size:13px;margin-bottom:0.25em}footer #footer-resources{text-align:right}footer #footer-resources i{color:#7b8a8b;font-size:28.5px;margin-left:0.5em}#sourceCodeModal h3{font-size:19px;margin-top:0}#sourceCodeModal h3 small{color:#7b8a8b;font-size:80%}#sourceCodeModal pre{margin-bottom:2em;padding:0}#confirmationModal .modal-dialog{width:500px}#confirmationModal .modal-footer button{min-width:75px}.form-group.has-error .form-control{border-color:#e74c3c}.form-group.has-error .control-label{color:#e74c3c}.form-group.has-error .help-block{background-color:#e74c3c;color:#fff;font-size:15px;padding:1em}.form-group.has-error .help-block ul{margin-bottom:0}textarea{max-width:100%}body#requirements_checker header h1{margin-bottom:0;margin-top:0}body#requirements_checker header h1 span{font-size:120%;opacity:0.7;padding:0 5px}body#requirements_checker .panel li{margin-bottom:1em}body#homepage{text-align:center}body#login #login-users-help p{font-size:15px;line-height:1.42857}body#login #login-users-help p:last-child{margin-bottom:0}body#login #login-users-help p .label{margin-right:5px}body#login #login-users-help p .console{display:block;margin:5px 0;padding:10px}body#blog_index h1{margin-bottom:0.5em}body#blog_index article.post{margin-bottom:3em}body#blog_post_show h3{margin-bottom:0.75em}body#blog_post_show #post-add-comment{margin:2em 0}body#blog_post_show #post-add-comment p{margin-bottom:0}body#blog_post_show #post-add-comment p a.btn{margin-right:0.5em}body#blog_post_show .post-comment{margin-bottom:2em}body#blog_post_show .post-comment h4{font-size:13px;line-height:1.42857;margin-top:0}body#blog_post_show .post-comment h4 strong{display:block}body#comment_form_error h1.text-danger{margin-bottom:1em}body#admin_post_index .item-actions{white-space:nowrap}body#admin_post_index .item-actions a.btn + a.btn{margin-left:4px}
+
+ //
+// Carousel
+// --------------------------------------------------
+
+
+// Wrapper for the slide container and indicators
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  > .item {
+    display: none;
+    position: relative;
+    .transition(.6s ease-in-out left);
+
+    // Account for jankitude on images
+    > img,
+    > a > img {
+      &:extend(.img-responsive);
+      line-height: 1;
+    }
+
+    // WebKit CSS3 transforms for supported devices
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      .transition-transform(~'0.6s ease-in-out');
+      .backface-visibility(~'hidden');
+      .perspective(1000px);
+
+      &.next,
+      &.active.right {
+        .translate3d(100%, 0, 0);
+        left: 0;
+      }
+      &.prev,
+      &.active.left {
+        .translate3d(-100%, 0, 0);
+        left: 0;
+      }
+      &.next.left,
+      &.prev.right,
+      &.active {
+        .translate3d(0, 0, 0);
+        left: 0;
+      }
+    }
+  }
+
+  > .active,
+  > .next,
+  > .prev {
+    display: block;
+  }
+
+  > .active {
+    left: 0;
+  }
+
+  > .next,
+  > .prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  > .next {
+    left: 100%;
+  }
+  > .prev {
+    left: -100%;
+  }
+  > .next.left,
+  > .prev.right {
+    left: 0;
+  }
+
+  > .active.left {
+    left: -100%;
+  }
+  > .active.right {
+    left: 100%;
+  }
+
+}
+
+// Left/right controls for nav
+// ---------------------------
+
+.carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: @carousel-control-width;
+  .opacity(@carousel-control-opacity);
+  font-size: @carousel-control-font-size;
+  color: @carousel-control-color;
+  text-align: center;
+  text-shadow: @carousel-text-shadow;
+  background-color: rgba(0, 0, 0, 0); // Fix IE9 click-thru bug
+  // We can't have this transition here because WebKit cancels the carousel
+  // animation if you trip this while in the middle of another animation.
+
+  // Set gradients for backgrounds
+  &.left {
+    #gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));
+  }
+  &.right {
+    left: auto;
+    right: 0;
+    #gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));
+  }
+
+  // Hover/focus state
+  &:hover,
+  &:focus {
+    outline: 0;
+    color: @carousel-control-color;
+    text-decoration: none;
+    .opacity(.9);
+  }
+
+  // Toggles
+  .icon-prev,
+  .icon-next,
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    z-index: 5;
+    display: inline-block;
+  }
+  .icon-prev,
+  .glyphicon-chevron-left {
+    left: 50%;
+    margin-left: -10px;
+  }
+  .icon-next,
+  .glyphicon-chevron-right {
+    right: 50%;
+    margin-right: -10px;
+  }
+  .icon-prev,
+  .icon-next {
+    width:  20px;
+    height: 20px;
+    line-height: 1;
+    font-family: serif;
+  }
+
+
+  .icon-prev {
+    &:before {
+      content: '\2039';// SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)
+    }
+  }
+  .icon-next {
+    &:before {
+      content: '\203a';// SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)
+    }
+  }
+}
+
+// Optional indicator pips
+//
+// Add an unordered list with the following class and add a list item for each
+// slide your carousel holds.
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    width:  10px;
+    height: 10px;
+    margin: 1px;
+    text-indent: -999px;
+    border: 1px solid @carousel-indicator-border-color;
+    border-radius: 10px;
+    cursor: pointer;
+
+    
+  }
+  .active {
+    margin: 0;
+    width:  12px;
+    height: 12px;
+    background-color: @carousel-indicator-active-bg;
+  }
+}
+
+// Optional captions
+// -----------------------------
+// Hidden by default for smaller viewports
+.carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: @carousel-caption-color;
+  text-align: center;
+  text-shadow: @carousel-text-shadow;
+  & .btn {
+    text-shadow: none; // No shadow for button elements in carousel-caption
+  }
+}
+
+
+// Scale up controls for tablets and up
+@media screen and (min-width: @screen-sm-min) {
+
+  // Scale up the controls a smidge
+  .carousel-control {
+    .glyphicon-chevron-left,
+    .glyphicon-chevron-right,
+    .icon-prev,
+    .icon-next {
+      width: (@carousel-control-font-size * 1.5);
+      height: (@carousel-control-font-size * 1.5);
+      margin-top: (@carousel-control-font-size / -2);
+      font-size: (@carousel-control-font-size * 1.5);
+    }
+    .glyphicon-chevron-left,
+    .icon-prev {
+      margin-left: (@carousel-control-font-size / -2);
+    }
+    .glyphicon-chevron-right,
+    .icon-next {
+      margin-right: (@carousel-control-font-size / -2);
+    }
+  }
+
+  // Show and left align the captions
+  .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+
+  // Move up the indicators
+  .carousel-indicators {
+    bottom: 20px;
+  }
+}

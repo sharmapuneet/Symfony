@@ -25,6 +25,15 @@
             <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block my_javascripts %}
+    {% javascripts
+        '@AppBundle/Resources/public/js/jquery.js'
+        '@AppBundle/Resources/public/js/bootstrap.min.js'
+        '@AppBundle/Resources/public/js/carousel.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}
     </head>
 
     <body id="{% block body_id %}{% endblock %}">

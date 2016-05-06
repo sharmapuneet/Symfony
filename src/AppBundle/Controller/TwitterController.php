@@ -23,14 +23,16 @@ class TwitterController extends Controller
      */
     public function tweetAction()
     {
-        $twitter = $this->get('endroid.twitter');
+               $twitter = $this->get('endroid.twitter');
 
 // Retrieve the user's timeline
 $response = $twitter->query('statuses/user_timeline', 'GET', 'json');
 $tweets = $response->getContent();
-     
+$messages = json_decode($tweets);
+return  $this->render('default/tweet.html.twig', array(
+    'messages' => $messages,
+));  
 
-     return new response($tweets);
 
 
 // Or retrieve the timeline using the generic query method

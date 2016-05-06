@@ -1,3 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% render "KnpLastTweetsBundle:Twitter:lastTweets" with {'username': 'puneet043'} %}
+      
+
+
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.carousel').carousel();
+        $('.carousel-inner .item:first').addClass('active');
+    });
+</script>
+{% endblock %}
+{% block body %}
+<div id="myCarousel" class="carousel slide well">
+	<div class="carousel-inner">
+		
+		{% for message in messages %}
+		<div class="item">
+			{{ message.text }}
+			</div>
+			{% endfor %}
+			
+		</div>
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+	<a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
+{% endblock %}
